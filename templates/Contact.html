@@ -1,0 +1,123 @@
+{% extends "layouts/Base.html" %}
+{% load static %}
+
+{% block title %}
+ 
+
+{% endblock %}
+
+
+{% block css %} 
+
+ 
+{% endblock %}
+
+{% block content %} 
+
+<section class="contact-area">
+    <div class="container">
+        <div class="gx-row d-flex justify-content-between gap-24">
+            <div class="contact-infos">
+                <h3 data-aos="fade-up">Contact Info</h3>
+                <ul class="contact-details">
+                    <li class="d-flex align-items-center" data-aos="zoom-in">
+                        <div class="icon-box shadow-box">
+                            <i class="iconoir-mail"></i>
+                        </div>
+                        <div class="right">
+                            <span>MAIL us</span>
+                            <h4>steeven10f@gmail.com</h4>
+                            <h4>steeven_45@outlook.es</h4>
+                        </div>
+                    </li>
+
+                    <li class="d-flex align-items-center" data-aos="zoom-in">
+                        <div class="icon-box shadow-box">
+                            <i class="iconoir-phone"></i>
+                        </div>
+                        <div class="right">
+                            <span>Contact Us</span>
+                            <h4>0996255103</h4>
+                        </div>
+                    </li> 
+                </ul>
+
+                <h3 data-aos="fade-up">Social Info</h3>
+                <ul class="social-links d-flex align-center" data-aos="zoom-in">
+                    <li><a class="shadow-box" href="#"><i class="iconoir-dribbble"></i></a></li>
+                    <li><a class="shadow-box" href="#"><i class="iconoir-twitter"></i></a></li>
+                    <li><a class="shadow-box" href="#"><i class="iconoir-instagram"></i></a></li>
+                </ul>
+            </div>
+
+            <div data-aos="zoom-in" class="contact-form">
+                <div class="shadow-box">
+            
+                    <h1>Let’s work <span>together.</span></h1>
+                    <form name="contactForm" method="POST" onsubmit="return validateForm()">
+                        {% csrf_token %}
+                        <div class="alert alert-success messenger-box-contact__msg" style="display: none" role="alert">
+                            Your message was sent successfully.
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="full-name" id="full-name" placeholder="Name *">
+                        </div>
+                        <div class="input-group">
+                            <input type="email" name="email" id="email" placeholder="Email *">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="subject" id="subject" placeholder="Your Subject *">
+                        </div>
+                        <div class="input-group">
+                            <textarea name="message" id="message" placeholder="Your Message *"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <button class="theme-btn submit-btn" name="submit" type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block extrajs %} 
+ 
+<script>
+    function validateForm(){
+        let name = document.forms['contactForm']['full-name'].value;
+        let email = document.forms['contactForm']['email'].value;
+        let subject = document.forms['contactForm']['subject'].value;
+        let message = document.forms['contactForm']['message'].value;
+  
+        if (name == '' || hasNumber(name)){
+            alert('Name must be filled out and must only contain letters');
+            return false;
+        } else if (email == '' && subject == ''){
+            alert('Email or subject must be filled out');
+            return false;
+        } else if (!(email.includes('@'))){
+            alert('Email does not seem to be valid');
+            return false;
+        }else if ( subject == ''){
+            alert('Subject number seems to contain letters');
+            return false;
+        } else if (message == ''){
+            alert('Message must be filled out');
+            return false;
+        } else {
+            // confirm or cancel
+            return confirm('Do you really want to sent the message?')
+        }
+    }
+  
+    function hasNumber(myString) {
+        return /\d/.test(myString);
+    }
+  </script>
+ 
+{% endblock extrajs %}
